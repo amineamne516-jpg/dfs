@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Masterclass IA Clinique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+:root{
+  --brand:#0A66C2; --brand-light:#60A5FA; --ink:#111827; --muted:#6B7280; --bg:#fff; --radius:16px; --shadow:0 8px 24px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;}
+.my-custom-hero-widget{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);scroll-behavior:smooth;}
+.my-custom-hero-widget *{margin:0;padding:0;}
+.my-custom-hero-widget a{text-decoration:none;color:inherit}
+.my-custom-hero-widget img{display:block;max-width:100%;height:auto}
+
+/* HERO */
+.my-custom-hero-widget .hero{padding:clamp(40px,6vw,80px) 20px;}
+.my-custom-hero-widget .hero__inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr;grid-template-areas:"right" "left";gap:48px;align-items:center;}
+.my-custom-hero-widget .hero__left{grid-area:left;}
+.my-custom-hero-widget .hero__right{grid-area:right;}
+@media(min-width:992px){.my-custom-hero-widget .hero__inner{grid-template-columns:1fr 1fr;grid-template-areas:"left right";}}
+.my-custom-hero-widget .eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:800}
+.my-custom-hero-widget .hero__title{font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.1;margin-bottom:8px}
+.my-custom-hero-widget .hero__sub{font-size:16px;color:#374151;line-height:1.6;margin-bottom:10px}
+
+/* Instructor */
+.my-custom-hero-widget .instructor-block{display:flex;align-items:center;gap:12px;margin:14px 0 6px}
+.my-custom-hero-widget .instructor-block img{width:40px;height:40px;border-radius:50%;object-fit:cover;display:block}
+.my-custom-hero-widget .instructor-block__text{font-size:14px;color:#374151}
+
+/* Key info */
+.my-custom-hero-widget .key-info{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 10px}
+.my-custom-hero-widget .key-info__item{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(0,0,0,.06);border-radius:10px}
+.my-custom-hero-widget .key-info__icon{width:18px;height:18px;color:#374151;flex:0 0 18px}
+.my-custom-hero-widget .key-info__label{font-size:14px;color:#374151}
+.my-custom-hero-widget .key-info__stack{display:flex;flex-direction:column;gap:2px}
+.my-custom-hero-widget .key-info__note{font-size:12px;color:var(--muted);line-height:1}
+
+/* Social proof */
+.my-custom-hero-widget .social-proof{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 18px}
+.my-custom-hero-widget .social-proof__line{display:inline-flex;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap}
+.my-custom-hero-widget .stars{display:inline-flex;gap:2px}
+.my-custom-hero-widget .stars svg{width:16px;height:16px;color:#f59e0b}
+.my-custom-hero-widget .stars svg.is-half{opacity:.5}
+.my-custom-hero-widget .rating{font-size:14px;color:#374151}
+.my-custom-hero-widget .reviews-link{font-size:13px;color:var(--brand);text-decoration:underline;cursor:pointer}
+.my-custom-hero-widget .reviews-link:hover{text-decoration:none}
+.my-custom-hero-widget .participants{font-size:13px;color:#374151}
+.my-custom-hero-widget .badge{font-size:12px;background:#eef2ff;color:#3730a3;border:1px solid rgba(55,48,163,.18);padding:2px 8px;border-radius:999px;font-weight:600}
+.my-custom-hero-widget .badge--success{background:#ecfdf5;color:#065f46;border-color:rgba(6,95,70,.18)}
+
+/* Hero testimonial */
+.my-custom-hero-widget .hero-testimonial{border:1px solid #e5e7eb;border-radius:12px;padding:14px;background:#fff;margin:10px 0 4px}
+.my-custom-hero-widget .hero-testimonial__quote{margin-top:8px;color:#111827;font-size:15px}
+.my-custom-hero-widget .hero-testimonial__author{margin-top:6px;color:#6b7280;font-weight:600;text-align:right}
+
+/* CTA + pricing */
+.my-custom-hero-widget .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 8px}
+.my-custom-hero-widget .btn{padding:14px 22px;border-radius:10px;font-weight:700;transition:transform .15s ease, background .2s ease}
+.my-custom-hero-widget .btn--primary{background:var(--brand);color:#fff}
+.my-custom-hero-widget .btn--primary:hover{transform:translateY(-1px);background:#0b5ab0}
+.my-custom-hero-widget .price{display:flex;align-items:baseline;gap:10px;margin:4px 0 6px}
+.my-custom-hero-widget .price__now{font-size:24px;font-weight:900}
+.my-custom-hero-widget .price__was{text-decoration:line-through;color:var(--muted)}
+.my-custom-hero-widget .urgency{font-size:13px;color:#374151}
+
+/* Guarantee icons */
+.my-custom-hero-widget .guarantee-block{margin:18px 0 10px;font-size:14px;color:#374151}
+.my-custom-hero-widget .logos-block{display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap}
+.my-custom-hero-widget .logos-block img{height:64px;width:auto;object-fit:contain;border:1px solid rgba(0,0,0,.06);border-radius:12px;background:#fff;padding:8px}
+
+/* Video */
+.my-custom-hero-widget .video-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#000}
+.my-custom-hero-widget .video-card a{display:block;position:relative;cursor:pointer}
+.my-custom-hero-widget .video-card img{width:100%;height:auto;display:block}
+.my-custom-hero-widget .video-card .play{position:absolute;inset:0;display:grid;place-items:center}
+.my-custom-hero-widget .video-card .play svg{width:72px;height:72px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.25))}
+@media(max-width:480px){.my-custom-hero-widget .video-card .play svg{width:60px;height:60}}
+
+/* Video modal full width rectangular */
+.my-custom-hero-widget .video-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1000;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+.my-custom-hero-widget .video-modal.is-open{display:flex;}
+.my-custom-hero-widget .video-modal__dialog{width:100vw;max-width:100vw;aspect-ratio:16/9;background:#000;border-radius:0;overflow:hidden;box-shadow:var(--shadow);transform:scale(1);opacity:1;}
+.my-custom-hero-widget .video-modal__close{position:absolute;top:14px;right:16px;background:rgba(0,0,0,.5);color:#fff;border:0;border-radius:999px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer}
+.my-custom-hero-widget .video-modal__video{width:100%;height:100%;display:block;background:#000}
+
+/* Sticky bar */
+.my-custom-hero-widget .stickybar{position:fixed;left:0;right:0;bottom:12px;margin:auto;max-width:860px;z-index:999;display:none;background:#0f172a;color:#fff;border-radius:12px;box-shadow:var(--shadow);padding:10px 14px}
+.my-custom-hero-widget .stickybar__inner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.my-custom-hero-widget .stickybar__title{font-weight:700}
+.my-custom-hero-widget .stickybar__price{font-weight:900;font-size:14px}
+.my-custom-hero-widget .stickybar .btn--primary{padding:10px 16px;border-radius:8px;background:var(--brand)}
+.my-custom-hero-widget .stickybar .btn--primary:hover{background:#0b5ab0}
+.my-custom-hero-widget .stickybar__close{background:none;border:0;color:#fff;font-size:18px;cursor:pointer}
+.my-custom-hero-widget .stickybar__meta{font-size:12px;opacity:.85}
+.my-custom-hero-widget .stickybar__price .was{opacity:.6;text-decoration:line-through}
+.my-custom-hero-widget .stickybar__countdown{font-weight:700}
+@media(max-width:520px){.my-custom-hero-widget .stickybar{left:10px;right:10px;bottom:10px}}
+
+/* Remove red tap/press highlight on "Voir plus" button + force blue states */
+.my-custom-hero-widget *{-webkit-tap-highlight-color:transparent;}
+.my-custom-hero-widget #skills-toggle{-webkit-tap-highlight-color:transparent;}
+.my-custom-hero-widget #skills-toggle,
+.my-custom-hero-widget #skills-toggle:hover,
+.my-custom-hero-widget #skills-toggle:focus,
+.my-custom-hero-widget #skills-toggle:active{
+  background:#fff !important;
+  color:#1d4ed8 !important;      /* blue-700 */
+  border-color:#93c5fd !important;/* blue-300 */
+  box-shadow:none !important;
+  background-image:none !important;
+  transform:none !important;
+  animation:none !important;
+  transition:background-color .2s ease, border-color .2s ease, color .2s ease !important;
+}
+.my-custom-hero-widget #skills-toggle:focus-visible{
+  outline:2px solid #60a5fa !important; /* blue-400 */
+  outline-offset:2px !important;
+}
+  </style>
+
+  <style>
+    /* Reviews Section Styles */
+    #reviews-section {
+      --star-filled: #f59e0b;
+      --star-empty: #d1d5db;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --card-bg: #ffffff;
+      --subtle-bg: #f9fafb;
+      --primary: #111827;
+
+      --blue-accent: #2563eb;
+      --blue-soft: #eef2ff;
+      --blue-border: #c7d2fe;
+      --blue-deep: #1e40af;
+      --overlay: rgba(17, 24, 39, 0.55);
+    }
+
+    #reviews-section { color: var(--text); font-family: inherit; line-height: 1.5; }
+    #reviews-section .reviews-container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+    #reviews-section .title { font-weight: 700; font-size: 20px; color: var(--primary); margin-bottom: 12px; }
+    #reviews-section .lead { border: 1px solid var(--border); background: var(--card-bg); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+    #reviews-section .lead .who { margin-top: 8px; color: var(--muted); font-weight: 600; }
+
+    /* CTA — white rectangular, blue outline/text + click pulse */
+    #reviews-section .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 16px; border-radius: 8px; border: 2px solid var(--blue-accent);
+      color: var(--blue-accent); background: #fff; cursor: pointer; font-weight: 700;
+      transition: background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 240ms ease, border-color 160ms ease;
+      position: relative; overflow: hidden;
+    }
+    #reviews-section .btn-primary:hover { background: var(--blue-soft); }
+    #reviews-section .btn-primary:active { transform: scale(.98); }
+    @keyframes pulseOutline {
+      0% { box-shadow: 0 0 0 0 rgba(37,99,235,.36); }
+      100% { box-shadow: 0 0 0 12px rgba(37,99,235,0); }
+    }
+    #reviews-section .btn-primary.pulse { animation: pulseOutline 560ms ease-out; }
+
+    /* Vote buttons (icon-only) */
+    #reviews-section .btn-vote { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border-radius: 999px; border: 1px solid var(--border); background: #fff; color: var(--primary); cursor: pointer; user-select: none; line-height: 0; transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, color 160ms ease, box-shadow 160ms ease; }
+    #reviews-section .btn-vote .icon { width: 18px; height: 18px; display: block; }
+    #reviews-section .btn-vote:hover { background: var(--blue-soft); border-color: var(--blue-border); color: var(--blue-deep); }
+    #reviews-section .btn-vote.bump { background: var(--blue-soft); border-color: var(--blue-border); color: var(--blue-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(71, 85, 105, 0.18); }
+
+    /* Stars */
+    #reviews-section .stars { display: flex; align-items: center; gap: 6px; }
+    #reviews-section .stars-sm svg { width: 16px; height: 16px; }
+    #reviews-section .stars-md svg { width: 20px; height: 20px; }
+    #reviews-section .stars-lg svg { width: 24px; height: 24px; }
+    #reviews-section .star-filled path { fill: var(--star-filled); stroke: var(--star-filled); stroke-width: 1.2; }
+    #reviews-section .star-empty path { fill: none; stroke: var(--star-empty); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Half-star support */
+    #reviews-section .star-mixed { position: relative; display: inline-block; line-height: 0; }
+    #reviews-section .star-mixed .empty svg { display: block; }
+    #reviews-section .star-mixed .empty path { fill: none; stroke: var(--star-empty); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    #reviews-section .star-mixed .half { position: absolute; inset: 0; overflow: hidden; }
+    #reviews-section .star-mixed .half svg { display: block; }
+    #reviews-section .star-mixed .half path { fill: var(--star-filled); stroke: var(--star-filled); stroke-width: 1.2; }
+
+    /* Review card — wider and taller; actions pinned to bottom */
+    #reviews-section .review-card { background: var(--card-bg); border: 1px solid #d1d5db; border-radius: 12px; padding: 22px; min-height: 420px; display: flex; flex-direction: column; }
+    #reviews-section .carousel .review-card { min-height: 540px; padding-bottom: 32px; }
+    #reviews-section .review-header { display: flex; align-items: center; justify-content: space-between; }
+    #reviews-section .review-header-left { display: flex; align-items: center; gap: 12px; }
+    #reviews-section .avatar { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; font-weight: 600; font-size: 14px; color: #fff; background: var(--primary); user-select: none; }
+    #reviews-section .user-name { font-weight: 600; color: var(--primary); }
+    #reviews-section .user-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    #reviews-section .time-ago { font-size: 13px; color: var(--muted); }
+    #reviews-section .review-content { margin-top: 12px; color: var(--primary); }
+    #reviews-section .review-actions { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; }
+    #reviews-section .actions-left { display: flex; align-items: center; gap: 10px; }
+    #reviews-section .label { color: var(--muted); font-size: 13px; }
+    #reviews-section .instructor-reply { margin-top: 12px; background: var(--subtle-bg); border-left: 4px solid var(--star-filled); border-radius: 8px; padding: 12px; }
+    #reviews-section .instructor-meta { font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+
+    /* Carousel */
+    #reviews-section .carousel { position: relative; }
+    #reviews-section .carousel-viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; padding: 0; }
+    #reviews-section .carousel-viewport::-webkit-scrollbar { display: none; }
+    #reviews-section .track { display: flex; gap: 22px; padding: 8px 0; }
+    #reviews-section .slide { flex: 0 0 100%; scroll-snap-align: start; }
+    #reviews-section .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; padding: 0; border-radius: 999px; box-sizing: border-box; background: #fffffff2; border: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; transition: background 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease; line-height: 0; }
+    #reviews-section .nav.prev { left: 8px; }
+    #reviews-section .nav.next { right: 8px; }
+    #reviews-section .nav:hover { background: var(--blue-soft); border-color: var(--blue-border); color: var(--blue-deep); box-shadow: 0 8px 24px rgba(71, 85, 105, 0.15); }
+    #reviews-section .nav svg { width: 20px; height: 20px; display: block; }
+    #reviews-section .cta-wrap { display: flex; justify-content: center; margin-top: 16px; }
+
+    /* Modal */
+    #reviews-section .modal-backdrop { position: fixed; inset: 0; background: var(--overlay); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 9999; }
+    #reviews-section .modal-backdrop.is-open { display: flex; }
+    #reviews-section .modal-panel { width: 100%; max-width: 960px; background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); transform: translateY(8px) scale(.98); opacity: 0; transition: transform 280ms cubic-bezier(.22,.61,.36,1), opacity 280ms ease; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
+    #reviews-section .modal-backdrop.is-open .modal-panel { transform: translateY(0) scale(1); opacity: 1; }
+    #reviews-section .modal-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    #reviews-section .modal-title { font-weight: 700; font-size: 18px; }
+    #reviews-section .close-btn { width: 40px; height: 40px; padding: 0; border-radius: 999px; border: 1px solid var(--border); background: #fff; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; justify-content: center; line-height: 0; transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease; }
+    #reviews-section .close-btn svg { width: 20px; height: 20px; display: block; }
+    #reviews-section .close-btn:hover { background: var(--blue-soft); border-color: var(--blue-border); color: var(--blue-deep); }
+    #reviews-section .close-btn:active { transform: scale(.96); }
+    #reviews-section .modal-body { padding: 16px; overflow: auto; }
+    #reviews-section .reviews-header { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 16px; }
+    @media (min-width: 768px) { #reviews-section .reviews-header { grid-template-columns: 320px 1fr; align-items: center; } }
+    #reviews-section .avg-box { border: 1px solid var(--border); background: var(--card-bg); border-radius: 12px; padding: 16px; text-align: center; }
+    #reviews-section .avg-score { font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 8px; color: var(--primary); }
+    #reviews-section .star-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 6px; }
+    #reviews-section .total-ratings { font-size: 14px; color: var(--muted); }
+    #reviews-section .breakdown { border: 1px solid var(--border); background: var(--card-bg); border-radius: 12px; padding: 16px; }
+    #reviews-section .breakdown-row { display: grid; grid-template-columns: 20px 1fr 48px; align-items: center; gap: 10px; margin: 8px 0; font-size: 14px; }
+    #reviews-section .bar { height: 10px; border-radius: 999px; background: var(--subtle-bg); overflow: hidden; }
+    #reviews-section .bar > span { display: block; height: 100%; background: var(--star-filled); width: 0%; transition: width 600ms ease; }
+    #reviews-section .reviews-list { display: grid; gap: 16px; margin-top: 8px; }
+  </style>
+
+  <style>
+    /* Lead magnet (academic) */
+    .dr-academic-section {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 45px 50px;
+        margin: 40px 0;
+        text-align: left;
+    }
+    .dr-academic-section h3 { font-family: Georgia, "Times New Roman", Times, serif; font-size: 26px; font-weight: 500; color: #212529; margin-top: 0; margin-bottom: 12px; }
+    .dr-academic-section p { font-size: 17px; color: #495057; line-height: 1.7; max-width: 700px; margin-bottom: 30px; }
+    .dr-academic-form-wrapper { display: flex; align-items: center; gap: 12px; }
+    .dr-academic-section input[type="email"] { flex-grow: 1; padding: 14px 16px; border: 1px solid #ced4da; border-radius: 5px; font-size: 16px; box-sizing: border-box; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .dr-academic-section input[type="email"]:focus { outline: none; border-color: #005A9C; box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.15); }
+    .dr-academic-section button { padding: 14px 28px; background-color: #005A9C; color: #ffffff; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color 0.2s ease; }
+    .dr-academic-section button:hover { background-color: #004170; }
+    .dr-academic-success-message { padding: 25px; background-color: #e9ecef; border-left: 5px solid #005A9C; color: #212529; font-size: 17px; font-weight: 500; line-height: 1.7; }
+    .dr-academic-success-message b { color: #004170; }
+    @media (max-width: 768px) {
+        .dr-academic-section { padding: 30px 25px; }
+        .dr-academic-form-wrapper { flex-direction: column; align-items: stretch; }
+        .dr-academic-section input[type="email"] { margin-bottom: 12px; }
+    }
+  </style>
+
+  <style>
+  /* Curriculum accordion */
+  #mc-accordion { background: #FFFFFF; color: #212529; max-width: 980px; margin: 0 auto; padding: 0 16px; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; }
+  #mc-accordion .mc-title { font-size: 18px; font-weight: 600; margin: 0 0 6px 0; color: #212529; }
+  #mc-accordion .mc-meta { font-size: 13px; color: #6B7280; margin: 0 0 12px 0; }
+  #mc-accordion .mc-toggle-all { appearance: none; background: transparent; border: 0; padding: 0; color: #2563EB; font-size: 13px; cursor: pointer; text-decoration: none; margin: 0 0 12px 0; }
+  #mc-accordion .mc-toggle-all:hover { text-decoration: underline; }
+  #mc-accordion .mc-list { display: block; margin: 0; padding: 0; }
+  #mc-accordion .mc-item { background: transparent; border: 0; border-radius: 0; overflow: visible; margin: 0; }
+  #mc-accordion .mc-header { display: flex; align-items: center; justify-content: flex-start; gap: 12px; list-style: none; padding: 16px 24px; margin: 0; cursor: pointer; user-select: none; background: #FAFAFA; border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; }
+  #mc-accordion .mc-header:hover { background: #F5F5F5; }
+  #mc-accordion .mc-header::-webkit-details-marker { display: none; }
+  #mc-accordion .mc-header::marker { content: ""; }
+  #mc-accordion .mc-number { font-weight: 600; color: #212529; }
+  #mc-accordion .mc-chevron { width: 20px; height: 20px; transform: rotate(0deg); transition: transform .2s ease; fill: #212529; flex: 0 0 auto; }
+  #mc-accordion details[open] .mc-chevron { transform: rotate(180deg); }
+  #mc-accordion .mc-content { padding: 8px 0 12px 0; background: #FFFFFF; }
+  #mc-accordion .mc-lessons { display: block; margin: 0; padding: 0; list-style: none; }
+  #mc-accordion .mc-lesson { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: transparent; transition: background-color .15s ease; }
+  #mc-accordion .mc-lesson:hover { background-color: #F8F9FA; }
+  #mc-accordion .mc-lesson-left { display: flex; align-items: center; min-width: 0; }
+  #mc-accordion .mc-lesson-icon { display: inline-flex; align-items: center; }
+  #mc-accordion .mc-lesson-icon svg { width: 18px; height: 18px; color: #555; }
+  #mc-accordion .mc-lesson-title { margin-left: 16px; font-weight: 400; color: #333; font-size: 14px; line-height: 1.4; flex: 1; min-width: 0; white-space: normal; overflow: visible; text-overflow: clip; }
+  #mc-accordion .mc-lesson-right { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+  #mc-accordion .mc-preview { display: inline-flex; align-items: center; gap: 8px; color: #A435F0; font-weight: 500; }
+  #mc-accordion .mc-preview svg { width: 14px; height: 14px; fill: #A435F0; }
+  </style>
+
+  <style>
+    /* Medical education content */
+    .medu{ --medu-heading:#0f172a; --medu-text:#334155; --medu-primary:#2563eb; box-sizing:border-box; max-width:64rem; margin:0 auto; padding:2rem; background:#fff }
+    .medu *{box-sizing:inherit}
+    .medu p{margin:0}
+    .medu__section{margin-bottom:3rem}
+    .medu__h2{font-size:1.25rem;font-weight:600;color:var(--medu-heading);margin:0 0 1.5rem 0}
+    .medu__body{color:var(--medu-text);line-height:1.625}
+    .medu__space-y-4>*+*{margin-top:1rem}
+    .medu__space-y-2>*+*{margin-top:.5rem}
+    .medu__ul{margin:0 0 0 1.5rem;padding:0;list-style:none}
+    .medu__ul li::before{content:"•";margin-right:.5rem}
+    .medu *{ animation:none !important; transition:none !important; text-decoration:none !important; }
+    .medu__accordion{ display:flex;align-items:center;justify-content:space-between;width:100%; background:none;border:0;padding:0;margin:0 0 1.5rem 0; font-size:1.25rem;font-weight:600;color:var(--medu-heading); text-align:left;cursor:pointer;appearance:none;-webkit-tap-highlight-color:transparent; outline:none;box-shadow:none }
+    .medu__accordion:hover,.medu__accordion:active,.medu__accordion:focus{ color:var(--medu-heading);outline:none;box-shadow:none }
+    .medu__showtoggle{ background:none;border:0;padding:0;margin:0; color:var(--medu-primary);font-weight:500;font-size:.875rem; cursor:pointer;appearance:none;-webkit-tap-highlight-color:transparent; outline:none;box-shadow:none }
+    .medu__showtoggle:hover,.medu__showtoggle:active,.medu__showtoggle:focus{ color:var(--medu-primary);outline:none;box-shadow:none }
+    .medu__spacer{height:1rem}
+    .medu, .medu *{ -webkit-tap-highlight-color: rgba(0,0,0,0); }
+    .medu button, .medu [role="button"]{ appearance:none; -webkit-appearance:none; -moz-appearance:none; background:none; border:0; outline:0; color:inherit; }
+    .medu button:focus, .medu button:active, .medu button:focus-visible, .medu [role="button"]:focus, .medu [role="button"]:active, .medu [role="button"]:focus-visible{ color: currentColor !important; -webkit-text-fill-color: currentColor !important; background-color: transparent !important; outline: none !important; box-shadow: none !important; text-decoration: none !important; }
+    .medu button::-moz-focus-inner{ border:0; }
+    .medu .medu__accordion, .medu .medu__showtoggle{ -webkit-tap-highlight-color: rgba(0,0,0,0); }
+    .medu .medu__accordion:focus, .medu .medu__accordion:active, .medu .medu__showtoggle:focus, .medu .medu__showtoggle:active{ color: currentColor !important; -webkit-text-fill-color: currentColor !important; }
+  </style>
+
+  <style>
+/* Instructor card */
+#instructor-card-2 { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans"; color: #111827; --blue: #2563eb; --muted: #6b7280; --border: #e5e7eb; --bg: #ffffff; }
+#instructor-card-2 .container { max-width: 56rem; margin: 0 auto; }
+#instructor-card-2 .heading-2 { font-size: 1.125rem; font-weight: 600; color: #111827; margin-bottom: 1rem; text-align: left; }
+#instructor-card-2 .card { background: var(--bg); border: 1px solid var(--border); border-radius: 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+#instructor-card-2 .card-content { padding: 1.25rem; }
+@media (min-width: 768px) { #instructor-card-2 .card-content { padding: 1.75rem; } }
+#instructor-card-2 .provider-banner { margin-bottom: 1rem; }
+#instructor-card-2 .provider-name { color: var(--blue); font-weight: 600; font-size: 1.0625rem; line-height: 1.35; margin: 0 0 0.25rem 0; text-align: left; }
+#instructor-card-2 .provider-type { color: var(--muted); font-size: 0.95rem; margin: 0; }
+#instructor-card-2 .section-top { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+@media (min-width: 768px) { #instructor-card-2 .section-top { gap: 1.5rem; } }
+#instructor-card-2 .media { position: relative; height: 140px; border-radius: 0.75rem; overflow: hidden; background: #f3f4f6; }
+@media (min-width: 480px) { #instructor-card-2 .media { height: 170px; } }
+@media (min-width: 768px) { #instructor-card-2 .media { height: 260px; } }
+#instructor-card-2 .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#instructor-card-2 .right-col { display: flex; flex-direction: column; gap: 0.875rem; text-align: left; }
+#instructor-card-2 .stats { display: grid; gap: 0.75rem; }
+#instructor-card-2 .stat { display: flex; align-items: center; gap: 0.6rem; }
+#instructor-card-2 .icon { width: 18px; height: 18px; color: var(--muted); }
+#instructor-card-2 .stat-text { font-size: 0.98rem; color: #4b5563; }
+#instructor-card-2 .stat-text .value { color: #111827; font-weight: 600; }
+#instructor-card-2 .section-about { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); text-align: left; }
+#instructor-card-2 .section-title { font-weight: 600; color: #111827; font-size: 1rem; margin: 0 0 0.5rem 0; text-align: left; }
+#instructor-card-2 .body-text { font-size: 0.98rem; color: #4b5563; line-height: 1.7; }
+#instructor-card-2 .about-preview .preview-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+#instructor-card-2 .about-more { display: none; }
+#instructor-card-2 .toggle-more { background: none; border: 0; padding: 0; color: var(--blue); font-size: 0.98rem; margin-top: 0.5rem; cursor: pointer; }
+#instructor-card-2 .toggle-more:hover { text-decoration: underline; }
+#instructor-card-2 .bullets p + p { margin-top: 0.25rem; }
+#instructor-card-2 .bullets .emph { font-weight: 600; color: #111827; }
+  </style>
+
+  <style>
+  /* CTA offer block */
+  :root { --cta: #0b6ef6; --cta-hover: #095fd6; --muted: #5c6b7a; --max-width: 1100px; }
+  .white-section { background: #fff; padding: 3rem 1rem; }
+  .section-container { max-width: var(--max-width); margin: auto; }
+  .section-title { font-size: clamp(1.8rem, 3vw, 2.2rem); margin-bottom: 1rem; text-align: center; }
+  .section-sub { text-align: center; color: var(--muted); margin-bottom: 2rem; max-width: 50ch; margin-left: auto; margin-right: auto; }
+  .story-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
+  @media(min-width:900px) { .story-wrapper { flex-direction: row; align-items: flex-start; } }
+  .story-profile { text-align: center; flex: 0 0 200px; }
+  .author-photo { width: 120px; border-radius: 50%; margin-bottom: 0.5rem; }
+  .author-name { font-weight: bold; }
+  .author-role { color: var(--muted); font-size: 0.9rem; }
+  .story-text figure { margin: 1rem 0; }
+  .story-text figcaption { font-size: 0.85rem; color: var(--muted); }
+  .learn-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media(min-width:768px) { .learn-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(min-width:1024px) { .learn-grid { grid-template-columns: repeat(3, 1fr); } }
+  .learn-card { background: #f9fbfd; border-radius: 14px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .learn-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .learn-card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .learn-card p { font-size: 0.95rem; color: var(--muted); }
+  .cta-section { background: #f9fbfd; text-align: center; padding: 3rem 1rem; }
+  .cta-heading { font-size: 1.8rem; margin-bottom: 0.3rem; }
+  .cta-subheading { color: var(--muted); margin-bottom: 1rem; }
+  .price { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .original-price { text-decoration: line-through; color: #999; margin-right: 0.5rem; }
+  .current-price { font-weight: bold; color: var(--cta); }
+  .offer-tag { font-size: 0.9rem; color: #e63946; margin-bottom: 1rem; }
+  .btn-primary { display: inline-block; background: var(--cta); color: #fff; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: bold; }
+  .btn-primary:hover { background: var(--cta-hover); }
+  .cta-subtext { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+  .guarantee-box { display: flex; align-items: flex-start; gap: 0.8rem; background: #fff; padding: 1rem; margin-top: 1.5rem; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.05); max-width: 500px; margin-left: auto; margin-right: auto; }
+  .guarantee-icon { font-size: 1.5rem; }
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease forwards; }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+
+  <style>
+    /* FAQ */
+    #e-faq-1 { --fg: #111827; --muted: #6b7280; --border: #e5e7eb; --primary: #2563eb; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; max-width: 100%; overflow-x: hidden; }
+    #e-faq-1, #e-faq-1 * { box-sizing: border-box; }
+    #e-faq-1 .faq-container { max-width: 64rem; width: 100%; margin-left: auto; margin-right: auto; padding: 1.5rem; }
+    #e-faq-1 h2 { font-size: 1.5rem; line-height: 2rem; font-weight: 500; margin-bottom: 2rem; color: var(--fg); }
+    #e-faq-1 .faq-list { margin: 0; padding: 0; }
+    #e-faq-1 .faq-item { border-bottom: 1px solid var(--border); list-style: none; }
+    #e-faq-1 .faq-question { width: 100%; padding: 1.5rem 0; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: .75rem; background: transparent; border: 0; cursor: pointer; transition: background-color .15s ease; }
+    #e-faq-1 .faq-question:hover { background-color: #f9fafb; }
+    #e-faq-1 .question-text { padding-right: .25rem; font-size: 1rem; font-weight: 500; color: var(--fg); flex: 1 1 auto; min-width: 0; white-space: normal; word-break: break-word; overflow-wrap: anywhere; }
+    #e-faq-1 .chevron { width: 1rem; height: 1rem; flex: 0 0 auto; display: block; transition: transform .2s ease; color: var(--muted); }
+    #e-faq-1 .faq-question[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    #e-faq-1 .faq-answer { padding: 0 0 1.5rem 0; }
+    #e-faq-1 .answer-text { font-size: 1rem; line-height: 1.75; color: var(--fg); word-break: break-word; overflow-wrap: anywhere; }
+    #e-faq-1 .answer-text a { color: var(--primary); text-decoration: none; word-break: break-word; }
+    #e-faq-1 .answer-text a:hover { text-decoration: underline; }
+    #e-faq-1 .faq-item[data-initially-hidden="true"] { display: none; }
+    #e-faq-1.show-all .faq-item[data-initially-hidden="true"] { display: block; }
+    #e-faq-1 .show-all { margin-top: 2rem; text-align: center; }
+    #e-faq-1 .show-all button { background: transparent; border: 0; color: var(--primary); font-size: 1rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: color .15s ease; max-width: 100%; }
+    #e-faq-1 .show-all button:hover { text-decoration: underline; }
+    #e-faq-1 .show-all .chevron { transform: none !important; }
+    @media (max-width: 640px) { #e-faq-1 .faq-container { padding: 1rem; } #e-faq-1 h2 { font-size: 1.25rem; margin-bottom: 1.25rem; } #e-faq-1 .faq-question { padding: 1rem 0; } }
+    #e-faq-1.show-all .show-all { display: none; }
+  </style>
+</head>
+<body class="bg-white antialiased">
+  <!-- HERO -->
+  <div class="my-custom-hero-widget">
+    <header class="hero" id="hero">
+      <div class="hero__inner">
+        <div class="hero__right">
+          <div class="video-card">
+            <a href="#" data-video-src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/08204.mp4" aria-label="Lire la vidéo de présentation">
+              <img src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/one-o-one.png" alt="Aperçu de la masterclass IA clinique">
+              <span class="play" aria-hidden="true">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="44" fill="rgba(255,255,255,.94)"/>
+                  <polygon points="42,35 72,50 42,65" fill="#0A66C2"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__left">
+          <p class="eyebrow">MASTERCLASS EN IA CLINIQUE</p>
+          <h1 class="hero__title">IA Générative en Clinique : La Méthodologie</h1>
+          <p class="hero__sub">Pour transformer la charge administrative en temps médical et augmenter la précision de vos comptes-rendus.</p>
+          <p style="font-size:1em; color:#555;">Proposé par l'Institut Certis Santé | Développé par des cliniciens | Déjà +500 professionnels formés</p>
+
+          <div class="instructor-block">
+            <img src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/istockphoto-1271062031-612x612-1.jpg" alt="Institut Certis Santé Formation Continue IA &amp; Médecine Augmentée">
+            <div class="instructor-block__text">
+              Proposé par
+              <a href="#instructor-card-2" class="text-blue-700 underline hover:no-underline">Institut Certis Santé Formation Continue IA &amp; Médecine Augmentée</a>
+            </div>
+          </div>
+
+          <div class="key-info" aria-label="Informations clés">
+            <div class="key-info__item">
+              <svg class="key-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>
+              </svg>
+              <span class="key-info__label">Durée : 3 heures (à votre rythme)</span>
+            </div>
+            <div class="key-info__item">
+              <svg class="key-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z"></path>
+              </svg>
+              <span class="key-info__label">Niveau : Tous niveaux</span>
+            </div>
+            <div class="key-info__item">
+              <svg class="key-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M7 8h10M7 12h6"></path>
+              </svg>
+              <div class="key-info__stack">
+                <span class="key-info__note">Contenu certifié evidence based.</span>
+                <span class="key-info__label">Accréditation : Validation DPC en cours</span>
+              </div>
+            </div>
+            <div class="key-info__item">
+              <svg class="key-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="12" rx="2"></rect><path d="M12 20h0"></path>
+              </svg>
+              <span class="key-info__label">Format : 100% en ligne</span>
+            </div>
+          </div>
+
+          <div class="social-proof" aria-label="Preuves sociales">
+            <div class="social-proof__line">
+              <span class="stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+                <svg class="is-half" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              </span>
+              <span class="rating"><strong>4.6</strong></span>
+              <a href="#reviews" class="reviews-link">(237 avis)</a>
+              <span class="participants">523 participants</span>
+            </div>
+            <span class="badge">Recommandé</span>
+            <span class="badge badge--success">Best Seller</span>
+          </div>
+
+          <!-- Hero Testimonial (standalone) -->
+          <div class="hero-testimonial" aria-label="Témoignage">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+            </div>
+            <div class="hero-testimonial__quote">« Ce qui m’a surpris, ce n’est pas la vitesse, mais la rigueur médicale que les prompts apportent. Je pensais que ça allait simplifier ; ça améliore carrément le raisonnement clinique. »</div>
+            <div class="hero-testimonial__author">Dr. Emma L.</div>
+            <p style="text-align:center; margin-top:10px;"><a href="#reviews" style="text-decoration:underline; color:#0056b3; font-size:0.9em;">Voir les 236 autres avis de confrères →</a></p>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn--primary js-scroll-cta" href="https://masterclasspromptingclinique.podia.com/masterclass-prompting-clinique/buy" rel="noopener">Intégrer la Masterclass</a>
+          </div>
+
+          <div style="font-size:12px;color:var(--muted);font-weight:700;margin-top:2px">Accès au Programme Complet</div>
+          <div class="price">
+            <div class="price__now">89&nbsp;€</div>
+            <div class="price__was">179&nbsp;€</div>
+          </div>
+          <div class="urgency">Offre de lancement pour praticiens (se termine dans <span id="countdown">48:00:00</span>)</div>
+
+          <div class="guarantee-block"><p><strong>Engagement "Impact Clinique" 14 jours.</strong> Intégrez les premiers modules à votre pratique. Si vous ne constatez pas un bénéfice tangible et immédiat, un remboursement intégral est effectué sur simple demande. Sans risque.</p></div>
+          <div class="logos-block" aria-label="Accréditations et qualité">
+            <img src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/Untitled-1080-x-750-px.png" alt="Icône qualité 1" loading="lazy">
+            <img src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/Untitled-1080-x-750-px-1.png" alt="Icône qualité 2" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="stickybar" id="stickybar" role="region" aria-label="Barre d’action">
+      <div class="stickybar__inner">
+        <div>
+          <div class="stickybar__title">Masterclass IA Clinique</div>
+          <div class="stickybar__price">
+            89&nbsp;€ <span class="was">179&nbsp;€</span>
+            <span class="stickybar__meta">• se termine dans <span class="stickybar__countdown" id="stickyCountdown">48:00:00</span></span>
+          </div>
+        </div>
+        <a class="btn btn--primary js-scroll-cta" href="https://masterclasspromptingclinique.podia.com/masterclass-prompting-clinique/buy" rel="noopener">Intégrer</a>
+        <button class="stickybar__close" id="stickybarClose" aria-label="Fermer la barre">✕</button>
+      </div>
+    </div>
+
+    <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="video-modal__dialog">
+        <button class="video-modal__close" id="videoModalClose" aria-label="Fermer la vidéo">✕</button>
+        <video id="heroVideo" class="video-modal__video" controls preload="metadata" playsinline poster="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/one-o-one.png"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thin stylish soft blue separator -->
+  <div class="w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-px w-full bg-blue-100/80 rounded-full"></div>
+    </div>
+  </div>
+
+  
+
+  <!-- WHAT YOU WILL MASTER -->
+  <section id="objectifs-pedagogiques" class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        <!-- Colonne gauche -->
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
+            Ce que Vous Allez Maîtriser
+          </h2>
+          <ul class="mt-6 space-y-5">
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 flex-none text-blue-600 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+              <p class="text-lg text-gray-700"><span class="font-semibold text-gray-900">Le Cadre de Sécurité des LLM</span> : Anticiper les limites inhérentes des modèles pour une utilisation clinique sûre et responsable, en protégeant votre jugement final.</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 flex-none text-blue-600 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+              <p class="text-lg text-gray-700"><span class="font-semibold text-gray-900">L'Augmentation du Raisonnement Clinique</span> : Utiliser l'IA pour structurer et explorer des diagnostics différentiels complexes, augmentant ainsi l'exhaustivité de votre analyse.</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 flex-none text-blue-600 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+              <p class="text-lg text-gray-700"><span class="font-semibold text-gray-900">Le Protocole de Prompting Avancé</span> : Appliquer des techniques précises pour générer des réponses fiables, sourcées, et minimiser drastiquement le risque d'hallucinations factuelles.</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 flex-none text-blue-600 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>
+              <p class="text-lg text-gray-700"><span class="font-semibold text-gray-900">L'Intégration Éthique au Flux de Travail</span> : Intégrer l'IA comme un assistant expert, en maintenant une séparation claire entre l'aide à la rédaction et la décision médicale.</p>
+            </li>
+          </ul>
+
+          <h2 class="mt-12 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">
+            Compétences acquises
+          </h2>
+
+          <!-- Pills grid kept as-is -->
+          <div class="mt-6 grid grid-cols-2 gap-3" id="skills-grid">
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Modélisation du risque</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">Annalyse de données médicales</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">Annalyse de données medicales</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">synthèse de la litterature scientifique</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">Automatisation des taches reaactionelle repeptitive</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">Apprentissage automatique appliqué</span>
+          </div>
+
+          <div class="mt-3 grid grid-cols-2 gap-3 hidden" id="skills-grid-more" aria-hidden="true">
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Planification de traitement</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Analyse d'images</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Médecine de précision</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0 col-span-2">Ingénierie des caractéristiques</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Modélisation prédictive</span>
+            <span class="inline-flex w-full items-center justify-center bg-blue-50 text-blue-800 font-semibold rounded-full px-2 py-1 border border-blue-200 text-[10px] sm:text-xs leading-none whitespace-nowrap min-w-0">Personnalisation par l'IA</span>
+          </div>
+
+          <button id="skills-toggle" class="mt-4 inline-flex items-center px-5 py-2 rounded-full bg-white text-blue-700 font-semibold border border-blue-300 hover:bg-blue-50 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors" aria-expanded="false" aria-controls="skills-grid-more">
+            Voir plus
+          </button>
+        </div>
+
+        <!-- Colonne droite (carte sticky) -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-8 border border-gray-200 rounded-lg p-6 bg-white overflow-hidden">
+            <h3 class="text-xl font-bold text-gray-900">Détails de la Formation</h3>
+
+            <ul class="mt-4 border-b border-gray-200 pb-4 space-y-4">
+              <li class="flex items-start gap-3">
+                <img class="h-6 w-6 flex-none mt-0.5 object-contain" src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/LinkedIn_icon.svg.webp" alt="LinkedIn">
+                <div class="space-y-0.5">
+                  <p class="font-semibold text-gray-900">Certificat de Formation Vérifiable</p>
+                  <p class="text-gray-600">À valoriser sur votre profil LinkedIn et votre CV.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <img class="h-6 w-6 flex-none mt-0.5 object-cover rounded" src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/d633YKCm_400x400.jpg" alt="Français">
+                <div class="space-y-0.5">
+                  <p class="font-semibold text-gray-900">Enseignement dédié aux professionnels de la santé</p>
+                  <p class="text-gray-600">Contenu créé par et pour des professionnels de santé francophones.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="h-6 w-6 text-gray-400 flex-none mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v5l3 2M12 22a10 10 0 110-20 10 10 0 010 20z"/></svg>
+                <div class="space-y-0.5">
+                  <p class="font-semibold text-gray-900">Accès Illimité à la Demande</p>
+                  <p class="text-gray-600">Progressez à votre rythme, selon vos disponibilités.</p>
+                </div>
+              </li>
+            </ul>
+
+            <a href="https://masterclasspromptingclinique.podia.com/masterclass-prompting-clinique/buy" class="mt-6 block w-full text-center bg-blue-600 text-white font-bold text-base py-3 rounded-md hover:bg-blue-700 transition-colors">Intégrer la Masterclass</a>
+            <p class="mt-2 text-center text-sm text-gray-600">Accès immédiat au premier module.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW LIBRARY (moved below Methodology) -->
+  <div id="reviews" aria-hidden="true" style="position:relative;top:-1px"></div>
+  <div id="reviews-section" aria-label="Preuves sociales">
+    <div class="reviews-container" aria-live="polite">
+      <div class="title">Une Approche Validée par Vos Confrères</div>
+      <div class="carousel" id="carousel-view">
+        <button class="nav prev" aria-label="Précédent" type="button">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-viewport"><div class="track" id="carousel-track"></div></div>
+        <button class="nav next" aria-label="Suivant" type="button">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="cta-wrap"><button id="show-all" class="btn-primary" type="button">Voir tous les commentaires</button></div>
+    </div>
+    <div class="modal-backdrop" id="reviews-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal-panel" role="document">
+        <div class="modal-header">
+          <div class="modal-title">Avis</div>
+          <button class="close-btn" id="close-modal" aria-label="Fermer" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="modal-body">
+          <div class="reviews-header">
+            <div class="avg-box"><div class="avg-score" id="avg-score">4.5</div><div class="star-row stars-md" id="avg-stars"></div><div class="total-ratings" id="total-ratings"></div></div>
+            <div class="breakdown" id="breakdown"></div>
+          </div>
+          <div class="reviews-list" id="reviews-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRICULUM -->
+  <!-- Inline icon sprite for curriculum -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect><path d="M10 9v6l5-3z" fill="currentColor"></path></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="M8.12 9.29L12 13.17l3.88-3.88a1 1 0 1 1 1.41 1.42l-4.59 4.58a1 1 0 0 1-1.41 0L6.7 10.7a1 1 0 1 1 1.42-1.41z"></path></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></symbol>
+  </svg>
+
+  <section id="mc-accordion" aria-labelledby="modules-title">
+    <p class="mc-title" id="modules-title">Contenu du cours</p>
+    <p class="mc-meta">8 modules : Durée totale 3h08 min</p>
+    <button type="button" class="mc-toggle-all" aria-expanded="false" aria-controls="mc-accordion-list">Déplier toutes les sections</button>
+    <div id="mc-accordion-list" class="mc-list"></div>
+  </section>
+
+  <!-- LEAD MAGNET -->
+  <div class="dr-academic-section">
+    <div id="drFrameworkContent">
+        <h3>Testez la Méthode : Recevez Notre Protocole d'Une Page</h3>
+        <p>Recevez notre framework d'une page qui structure la formulation de prompts cliniques. Appliquez-le sur votre prochain compte-rendu pour constater par vous-même la clarté et la rapidité du résultat.</p>
+        <form id="drFrameworkForm">
+            <div class="dr-academic-form-wrapper">
+                <input type="email" id="drFrameworkEmail" placeholder="Votre adresse email professionnelle" required>
+                <button type="submit">Recevoir le protocole</button>
+            </div>
+        </form>
+    </div>
+    <div id="drFrameworkSuccess" style="display: none;">
+        <div class="dr-academic-success-message">
+            <b>Framework transmis.</b> Vous venez de découvrir la puissance d'une instruction structurée. Notre masterclass enseigne la méthodologie pour concevoir vous-même ces frameworks pour n'importe quelle tâche clinique, transformant l'IA en un véritable assistant personnel.
+        </div>
+    </div>
+  </div>
+
+  <!-- INSTRUCTORS / ABOUT -->
+  <div id="instructor-card-2">
+    <div class="container">
+      <h2 class="heading-2">Instructeurs</h2>
+      <div class="card">
+        <div class="card-content">
+          <div class="provider-banner">
+            <h3 class="provider-name"> Institut Certis – Pôle d’expertise pour l’IA appliquée à la santé</h3>
+            <p class="provider-type">Organisme à but non lucratif</p>
+          </div>
+          <div class="section-top">
+            <div class="media">
+              <img src="https://masterclass-prompting-medical.online/wp-content/uploads/2025/08/istockphoto-1271062031-612x612-1.jpg" alt="Certis Santé — Institut Certis – Pôle d’expertise pour l’IA appliquée à la santé" loading="lazy" />
+            </div>
+            <div class="right-col">
+              <div class="stats">
+                <div class="stat">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span class="stat-text"><span class="value">4,9</span> Note instructeur</span>
+                </div>
+                <div class="stat">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5c-1.3 0-2.5-.3-3.6-.8L3 21l1.8-5.4a8.4 8.4 0 0 1-.8-3.6 8.5 8.5 0 0 1 8.5-8.5 8.5 8.5 0 0 1 8.5 8.5Z"></path></svg>
+                  <span class="stat-text">237 Avis</span>
+                </div>
+                <div class="stat">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <span class="stat-text">700 Professionnels formés</span>
+                </div>
+                <div class="stat">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>
+                  <span class="stat-text">7 Programmes cliniques</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: À propos -->
+          <div class="section-about body-text">
+            <div id="about-preview" class="about-preview">
+              <h4 class="section-title">À propos</h4>
+              <p class="preview-text">
+                Conçus et testés en contexte hospitalier par notre équipe de médecins et de data scientists, nos parcours de formation privilégient l'applicabilité immédiate : méthodes éprouvées, cas réels et retours d'équipes opérationnelles...
+              </p>
+            </div>
+            <div id="about-more" class="about-more">
+              <div class="about-block">
+                <h4 class="section-title">À propos</h4>
+                <p>Conçus et testés en contexte hospitalier par notre équipe de médecins et de data scientists, nos parcours de formation privilégient l'applicabilité immédiate : méthodes éprouvées, cas réels et retours d'équipes opérationnelles. Certis Santé conçoit des parcours de formation développés par des cliniciens et des data scientists, testés en contexte hospitalier. Nos contenus privilégient l'applicabilité immédiate : méthodes éprouvées, cas réels et retours d'équipes opérationnelles.</p>
+              </div>
+              <div class="about-block" style="margin-top:1rem;">
+                <h4 class="section-title">Mission</h4>
+                <p>Accompagner les médecins dans l'intégration responsable de l'IA pour améliorer la prise en charge des patients et la qualité de vie professionnelle, grâce à des formations pratiques et un suivi en milieu clinique.</p>
+              </div>
+              <div class="about-block" style="margin-top:1rem;">
+                <h4 class="section-title">Pourquoi les praticiens nous font confiance</h4>
+                <div class="bullets">
+                  <p>• <span class="emph">Preuve terrain</span> — retours quantifiables de services ayant intégré les workflows.</p>
+                  <p>• <span class="emph">Autorité clinique</span> — contenus élaborés par praticiens actifs et spécialistes en IA médicale.</p>
+                  <p>• <span class="emph">Sécurité et conformité</span> — principes déontologiques et bonnes pratiques intégrés au curriculum.</p>
+                  <p>• <span class="emph">Accompagnement concret</span> — newsletter bimensuelle, webinaires réguliers et sessions Q&A, et communauté d'échange entre pairs.</p>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="toggle-more" aria-expanded="false" aria-controls="about-more">Voir plus →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA OFFER (secondary) -->
+  <section id="cta-offer" class="cta-section" aria-labelledby="cta-title">
+    <div class="section-container fade-in">
+      <h2 id="cta-title" class="cta-heading">Obtenez le Protocole Complet</h2>
+      <p class="cta-subheading">Accès immédiat et à vie</p>
+      <div class="price"><span class="original-price">179€</span><span class="current-price">89€</span></div>
+      <p class="offer-tag">Offre de lancement limitée</p>
+      <a href="https://masterclasspromptingclinique.podia.com/masterclass-prompting-clinique/buy" class="btn-primary">Intégrer la Masterclass</a>
+      <div class="cta-subtext">Paiement sécurisé • Accès instantané</div>
+      <div class="guarantee-box">
+        <div class="guarantee-icon">🛡️</div>
+        <div>
+          <h4>Garantie "Impact Clinique" 14 jours</h4>
+          <p><strong>Engagement "Impact Clinique" 14 jours.</strong> Intégrez les premiers modules à votre pratique. Si vous ne constatez pas un bénéfice tangible et immédiat, un remboursement intégral est effectué sur simple demande. Sans risque.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="e-faq" id="e-faq-1">
+    <div class="faq-container" role="region" aria-label="Questions fréquemment posées">
+      <h2>Questions fréquemment posées</h2>
+      <div class="faq-list">
+        <div class="faq-item" data-index="0">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-0" id="faq-header-0">
+            <span class="question-text">Vais-je obtenir des crédits universitaires en complétant la Spécialisation ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-0" class="faq-answer" role="region" aria-labelledby="faq-header-0" hidden>
+            <div class="answer-text">Ce cours ne donne pas de crédits universitaires, mais certaines universités peuvent choisir d'accepter les Certificats de Cours pour des crédits. Vérifiez auprès de votre institution pour en savoir plus. <a href="#">Diplômes en Ligne</a> et <a href="#">Certificats MasterTrack™</a> sur Coursera offrent l'opportunité d'obtenir des crédits universitaires.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="1">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-1" id="faq-header-1">
+            <span class="question-text">Quelle est la politique de remboursement ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-1" class="faq-answer" role="region" aria-labelledby="faq-header-1" hidden>
+            <div class="answer-text">Coursera offre une période d'essai gratuite de 7 jours. Si vous annulez dans les 7 jours suivant votre abonnement initial, vous ne serez pas facturé. Après cela, vous pouvez annuler à tout moment mais ne recevrez pas de remboursement pour la période de facturation en cours.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="2">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-2" id="faq-header-2">
+            <span class="question-text">Vais-je recevoir un certificat à la fin ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-2" class="faq-answer" role="region" aria-labelledby="faq-header-2" hidden>
+            <div class="answer-text">Oui, après avoir terminé avec succès tous les cours de la Spécialisation, vous recevrez un Certificat Coursera que vous pourrez partager avec les employeurs et ajouter à votre profil LinkedIn.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="3" data-initially-hidden="true">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-3" id="faq-header-3">
+            <span class="question-text">Qu'en est-il de la confidentialité des données patient (RGPD) ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-3" class="faq-answer" role="region" aria-labelledby="faq-header-3" hidden>
+            <div class="answer-text">La protection des données est non négociable. Notre méthodologie est fondée sur le principe de l'utilisation de données cliniques anonymisées. Vous apprendrez à structurer vos requêtes pour obtenir des résultats pertinents sans jamais avoir à entrer d'informations directement identifiantes (nom, date de naissance, etc.). L'IA est utilisée comme un outil de raisonnement et de rédaction sur la base d'un cas clinique dépersonnalisé que vous seul pouvez ré-attribuer dans votre système sécurisé.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="4" data-initially-hidden="true">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-4" id="faq-header-4">
+            <span class="question-text">Comment gérer le risque d'erreurs ou d'"hallucinations" de l'IA ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-4" class="faq-answer" role="region" aria-labelledby="faq-header-4" hidden>
+            <div class="answer-text">C'est un risque réel et le cœur de notre enseignement est de vous armer pour le maîtriser. Nous ne vous apprenons pas à "faire confiance" à l'IA, mais à la contraindre et à la vérifier. Vous maîtriserez des techniques comme le "prompting de contrainte" et le "few-shot prompting" pour forcer l'IA à rester dans un cadre factuel et à citer ses sources. Le principe fondamental est simple : vous n'êtes pas un simple utilisateur ; vous devenez un validateur clinique expert qui utilise l'IA pour accélérer la production d'un brouillon de haute qualité.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="5" data-initially-hidden="true">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-5" id="faq-header-5">
+            <span class="question-text">L'IA ne risque-t-elle pas de remplacer mon jugement clinique ?</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-5" class="faq-answer" role="region" aria-labelledby="faq-header-5" hidden>
+            <div class="answer-text">Au contraire, notre approche vise à le libérer et à l'augmenter. L'IA est extrêmement performante pour les tâches cognitives de bas niveau (synthèse, reformulation, structuration), ce qui vous libère du temps et de la charge mentale pour vous concentrer sur les tâches de haut niveau que vous seul pouvez accomplir : le raisonnement critique, l'intuition médicale et la décision finale. L'IA est un outil d'augmentation, jamais un substitut à votre expertise.</div>
+          </div>
+        </div>
+        <div class="faq-item" data-index="6" data-initially-hidden="true">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-panel-6" id="faq-header-6">
+            <span class="question-text">Faut-il des compétences techniques ? Je n'ai pas le temps pour un outil complexe.</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <div id="faq-panel-6" class="faq-answer" role="region" aria-labelledby="faq-header-6" hidden>
+            <div class="answer-text">Aucune compétence technique n'est requise. La formation a été conçue spécifiquement pour des cliniciens, pas des ingénieurs. Si vous savez rédiger un email ou un SMS détaillé, vous maîtrisez déjà 90% de la technique. Le premier module est conçu pour vous donner un résultat tangible et utile en moins de 30 minutes, afin de prouver l'applicabilité immédiate de la méthode sans courbe d'apprentissage abrupte.</div>
+          </div>
+        </div>
+      </div>
+      <div class="show-all">
+        <button type="button" id="faq-show-all">
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Afficher les 7 questions fréquemment posées
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDU (module info sections) -->
+  <div class="medu" id="medical-education">
+    <section class="medu__section">
+      <button id="medu-acc-prereq" class="medu__accordion" aria-expanded="false" aria-controls="medu-prerequis" type="button">
+        <span>Prérequis</span>
+        <span class="medu__acc-ind" aria-hidden="true">▼</span>
+      </button>
+      <div id="medu-prerequis" class="medu__body medu__space-y-4" hidden>
+        <p>La formation ne requiert pas de compétences techniques avancées. Elle a été conçue pour les professionnels de santé souhaitant intégrer l'intelligence artificielle sans parcours préalable en informatique.</p>
+        <p>Une formation médicale ou une expérience clinique constitue le socle idéal.</p>
+        <p>Les aptitudes habituelles de raisonnement clinique et de gestion de l'information suffisent.</p>
+        <p>Aucune maîtrise de la programmation n'est exigée.</p>
+        <p>Des notions élémentaires en outils numériques peuvent faciliter la progression, mais ne sont en aucun cas obligatoires.</p>
+        <p>L'approche pédagogique part des situations cliniques réelles et introduit progressivement les concepts nécessaires à une utilisation rigoureuse et sécurisée de l'IA.</p>
+      </div>
+    </section>
+
+    <section class="medu__section">
+      <h2 class="medu__h2">Description</h2>
+      <div class="medu__body medu__space-y-4">
+        <p>L'intelligence artificielle est désormais intégrée aux pratiques médicales : imagerie, aide à la décision, documentation clinique, recherche. Cette masterclass propose un cadre structuré et progressif permettant de comprendre les grands modèles de langage et de les appliquer en contexte médical.</p>
+        <p class="medu__p--medium" style="font-weight:500">Le programme couvre :</p>
+        <ul class="medu__ul medu__space-y-2">
+          <li>les fondements théoriques (raisonnement probabiliste, biais, limites),</li>
+          <li>la pratique de l'ingénierie de prompt adaptée à la médecine,</li>
+          <li>des techniques avancées (raisonnement en chaîne, ancrage documentaire),</li>
+          <li>les perspectives émergentes (orchestration d'outils, IA multimodale).</li>
+        </ul>
+        <p>Une attention constante est portée à la responsabilité médicale : l'IA est un outil d'augmentation, non un substitut au jugement clinique.</p>
+      </div>
+    </section>
+
+    <section class="medu__section">
+      <h2 class="medu__h2">Bénéfices attendus</h2>
+      <div class="medu__body medu__space-y-4" id="medu-benefits">
+        <p>La maîtrise de l'IA en santé permet d'obtenir des résultats concrets et immédiats :</p>
+        <p><strong>Optimisation du temps :</strong> automatisation des tâches documentaires et réduction de la charge administrative.</p>
+        <button type="button" id="medu-toggle" class="medu__showtoggle" aria-controls="medu-after" aria-expanded="false">Afficher plus ▼</button>
+      </div>
+      <div id="medu-after" hidden>
+        <div class="medu__body medu__space-y-2">
+          <p><strong>Amélioration du diagnostic :</strong> utilisation structurée de l’IA comme support d’analyse et de raisonnement.</p>
+          <p><strong>Amélioration scientifique :</strong> capacité à synthétiser rapidement la littérature médicale croissante.</p>
+          <p><strong>Valorisation professionnelle :</strong> reconnaissance accrue dans les institutions de santé et auprès des pairs.</p>
+        </div>
+        <div class="medu__spacer"></div>
+        <section class="medu__section">
+          <h2 class="medu__h2">Public concerné</h2>
+          <div class="medu__body medu__space-y-4">
+            <p>La masterclass s'adresse à un large spectre de professionnels du secteur santé et innovation :</p>
+            <p>Médecins et soignants souhaitant moderniser leur pratique clinique.</p>
+            <p>Chercheurs et universitaires intégrant des méthodologies d'IA à leurs travaux.</p>
+            <p>Décideurs et administrateurs en charge de l'adoption d'outils numériques.</p>
+            <p>Entrepreneurs en santé développant des solutions technologiques validées cliniquement.</p>
+          </div>
+        </section>
+        <section class="medu__section">
+          <h2 class="medu__h2">Perspectives professionnelles</h2>
+          <div class="medu__body medu__space-y-4">
+            <p>La compétence en IA médicale devient progressivement un critère distinctif pour de nombreux postes. À l'issue de la formation, les participants peuvent envisager des fonctions telles que :</p>
+            <p>Référent IA au sein d'un établissement hospitalier,</p>
+            <p>Chercheur associé en médecine translationnelle ou bio-informatique,</p>
+            <p>Conseiller pour les politiques de santé numérique,</p>
+            <p>Innovateur ou entrepreneur en technologies de santé.</p>
+            <p>Ces rôles, en forte croissance, positionnent les praticiens formés comme des acteurs centraux de l'évolution du système de santé.</p>
+          </div>
+        </section>
+        <section class="medu__section">
+          <h2 class="medu__h2">Perspectives internationales et rémunération</h2>
+          <div class="medu__body medu__space-y-4">
+            <p>Dans plusieurs pays, la maîtrise de l'IA clinique est associée à une reconnaissance professionnelle et financière croissante.</p>
+            <p>En Europe et en Amérique du Nord, des postes hybrides (clinique et stratégie IA) se généralisent.</p>
+            <p>Les praticiens disposant de cette expertise bénéficient en moyenne de rémunérations supérieures de 20 à 40 %.</p>
+            <p>Dans les systèmes émergents, l'adoption précoce de ces compétences place les professionnels parmi les profils les plus recherchés.</p>
+          </div>
+        </section>
+        <div class="medu__spacer"></div>
+        <button type="button" id="medu-collapse" class="medu__showtoggle" aria-controls="medu-after" hidden>Voir moins ▲</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+(function(){
+  const hero  = document.getElementById('hero');
+  const bar   = document.getElementById('stickybar');
+  const close = document.getElementById('stickybarClose');
+  if (hero && bar && close) {
+    let dismissed = false;
+    const showBar = () => { if(!dismissed) bar.style.display='block'; }
+    const hideBar = () => { bar.style.display='none'; }
+    close.addEventListener('click', ()=>{ dismissed = true; hideBar(); });
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{ if(entry.isIntersecting) { hideBar(); } else { showBar(); } });
+      }, {threshold:0.1});
+      io.observe(hero);
+    }
+  }
+  // 48h countdown
+  (function(){
+    const H48 = 48 * 60 * 60 * 1000;
+    const KEY = 'heroCountdownEndTime';
+    const mainEl   = document.getElementById('countdown');
+    const stickyEl = document.getElementById('stickyCountdown');
+    let end = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (Number.isNaN(end) || end <= Date.now()) {
+      end = Date.now() + H48;
+      try { localStorage.setItem(KEY, String(end)); } catch(e){}
+    }
+    function fmt(ms){ if(ms<0)ms=0; const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=t%60; return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+    function tick(){ const rem=end-Date.now(); const txt=fmt(rem); if(mainEl) mainEl.textContent=txt; if(stickyEl) stickyEl.textContent=txt; if(rem<=0) clearInterval(timer); }
+    tick(); const timer=setInterval(tick,1000);
+  })();
+  // Smooth scroll for anchors
+  document.querySelectorAll('.my-custom-hero-widget .js-scroll-cta, a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const targetId = this.getAttribute('href') || '';
+      if (targetId.startsWith('#') && targetId.length>1){
+        const target = document.querySelector(targetId);
+        if (target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    });
+  });
+  // Video modal
+  const trigger = document.querySelector('.my-custom-hero-widget .video-card a');
+  const modal   = document.getElementById('videoModal');
+  const dialog  = modal ? modal.querySelector('.video-modal__dialog') : null;
+  const video   = document.getElementById('heroVideo');
+  const modalClose = document.getElementById('videoModalClose');
+  function openModal(){ if (!modal || !dialog || !video || !trigger) return; const src = trigger.getAttribute('data-video-src'); if(!src) return; video.src = src; modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); video.muted = true; video.currentTime = 0; setTimeout(()=>{ video.play().catch(()=>{}); }, 60); document.documentElement.style.overflow = 'hidden'; }
+  function closeModal(){ if (!modal || !video) return; modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); try{ video.pause(); }catch(e){} document.documentElement.style.overflow = ''; }
+  if (trigger && modal && dialog && video) {
+    trigger.addEventListener('click', e=>{ e.preventDefault(); openModal(); });
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e=>{ if(!dialog.contains(e.target)) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) closeModal(); });
+  }
+  // Skills toggle
+  const toggleBtn = document.getElementById('skills-toggle');
+  const more = document.getElementById('skills-grid-more');
+  if (toggleBtn && more){
+    toggleBtn.addEventListener('click', ()=>{
+      const isHidden = more.classList.contains('hidden');
+      more.classList.toggle('hidden');
+      toggleBtn.textContent = isHidden ? 'Voir moins' : 'Voir plus';
+      toggleBtn.setAttribute('aria-expanded', String(isHidden));
+      more.setAttribute('aria-hidden', String(!isHidden));
+    });
+  }
+})();
+  </script>
+
+  <script>
+    (function() {
+      // Data (Emma first)
+      var initialReviews = [
+        { id: "3", userName: "Dr. Emma L.", userInitials: "EL", rating: 5, timeAgo: "il y a 3 semaines",
+          content: "Ce qui m'a surpris, ce n'est pas la vitesse, mais la rigueur médicale que les prompts apportent. Je pensais que ça allait simplifier… ça améliore carrément le raisonnement clinique.",
+          helpful: 15, notHelpful: 2,
+          instructorResponse: { content: "C'est exactement ce que nous visons : accélérer les tâches répétitives tout en renforçant la qualité du raisonnement clinique.", timeAgo: "il y a 2 semaines", instructorName: "Équipe pédagogique" } },
+        { id: "1", userName: "Dr. Sarah M.", userInitials: "SM", rating: 5, timeAgo: "il y a 2 semaines",
+          content: "J'ai testé un prompt du module sur la rédaction de comptes rendus… j'ai gagné 20 minutes sur un seul patient. Je ne comprends pas comment on a pu travailler sans ça avant.",
+          helpful: 12, notHelpful: 0,
+          instructorResponse: { content: "Merci pour ce retour. Nos modules sont conçus pour un impact immédiat sur la pratique quotidienne, tout en maintenant la rigueur clinique.", timeAgo: "il y a 1 semaine", instructorName: "Équipe pédagogique" } },
+        { id: "2", userName: "Dr. Michael R.", userInitials: "MR", rating: 5, timeAgo: "il y a 1 mois",
+          content: "Dans mon service, on parle tous de surcharge administrative. Ce cours, c'est littéralement la première solution concrète que je vois.",
+          helpful: 8, notHelpful: 1,
+          instructorResponse: { content: "Nous sommes ravis que le contenu réponde à ce besoin. L'objectif est précisément de faciliter l'intégration des prompts dans le flux clinique.", timeAgo: "il y a 3 semaines", instructorName: "Équipe pédagogique" } },
+        { id: "4", userName: "Dr. David K.", userInitials: "DK", rating: 5, timeAgo: "il y a 2 mois",
+          content: "Même en radiologie, où la rédaction est très technique, ça marche. J'imagine à quel point ça doit être utile en médecine interne ou en chirurgie.",
+          helpful: 21, notHelpful: 0,
+          instructorResponse: { content: "Nos modules sont conçus pour être polyvalents et applicables à toutes les spécialités, y compris les plus techniques.", timeAgo: "il y a 1 mois", instructorName: "Équipe pédagogique" } },
+        { id: "5", userName: "Dr. Lisa P.", userInitials: "LP", rating: 5, timeAgo: "il y a 1 mois",
+          content: "J'aurais aimé avoir ça pendant mon internat. On perdait des nuits entières sur des comptes rendus que cette méthode boucle en quelques minutes.",
+          helpful: 6, notHelpful: 0,
+          instructorResponse: { content: "Nous avons effectivement pensé à cette tranche de carrière : l'implémentation précoce permet de gagner en temps et en organisation.", timeAgo: "il y a 3 semaines", instructorName: "Équipe pédagogique" } }
+      ];
+
+      var additionalReviews = [
+        { id: "6", userName: "Dr. Marie T.", userInitials: "MT", rating: 5, timeAgo: "il y a 1 semaine",
+          content: "On dit souvent que l'IA déshumanise. Ici c'est l'inverse : moins de paperasse, plus de temps au chevet.",
+          helpful: 9, notHelpful: 0,
+          instructorResponse: { content: "Exactement. L'un des objectifs principaux est de libérer du temps pour le suivi direct du patient et les décisions cliniques.", timeAgo: "il y a 6 jours", instructorName: "Équipe pédagogique" } },
+        { id: "7", userName: "Dr. Antoine B.", userInitials: "AB", rating: 5, timeAgo: "il y a 2 mois",
+          content: "Honnêtement, ça devrait faire partie du programme de FMC obligatoire. C'est rare de voir une formation aussi immédiatement applicable.",
+          helpful: 4, notHelpful: 3,
+          instructorResponse: { content: "Nous partageons cette vision. Le contenu a été pensé pour une application directe et mesurable dès les premières utilisations.", timeAgo: "il y a 1 mois", instructorName: "Équipe pédagogique" } },
+        { id: "8", userName: "Dr. Claire N.", userInitials: "CN", rating: 5, timeAgo: "il y a 3 jours",
+          content: "Depuis que j'utilise leurs prompts, mes internes me demandent systématiquement comment je fais pour aller aussi vite. Je ne leur ai pas encore dit…",
+          helpful: 11, notHelpful: 0,
+          instructorResponse: { content: "C'est exactement l'effet que nous constatons : les équipes qui adoptent les prompts observent rapidement un gain d'efficacité collectif.", timeAgo: "il y a 2 jours", instructorName: "Équipe pédagogique" } },
+        { id: "9", userName: "Dr. Philippe G.", userInitials: "PG", rating: 5, timeAgo: "il y a 1 mois",
+          content: "Partagé ce module avec un collègue chirurgien : il m'a avoué que l'astuce pour prédire le risque opératoire à partir des données patients en préopératoire changeait complètement sa manière de planifier.",
+          helpful: 7, notHelpful: 1,
+          instructorResponse: { content: "Nos modules de préopératoire sont conçus pour améliorer la planification et la sécurité des décisions, comme le remarque votre collègue.", timeAgo: "il y a 3 semaines", instructorName: "Équipe pédagogique" } }
+      ];
+
+      var reviewStats = { averageRating: 4.5, totalRatings: 237, breakdown: { 5:118, 4:71, 3:30, 2:12, 1:6 } };
+
+      var starPath = "M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z";
+      var iconThumbUp = '<svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 11h2v9H7zM14 20h3a3 3 0 0 0 3-3v-5h-6l1-4-5 4v9h4z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+      var iconThumbDown = '<svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 13h-2V4h2zM10 4H7a3 3 0 0 0-3 3v5h6l-1 4 5-4V4h-4z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+
+      function renderStars(rating, size) {
+        var sizeClass = size === 'lg' ? 'stars-lg' : size === 'md' ? 'stars-md' : 'stars-sm';
+        var full = Math.floor(rating);
+        var fraction = rating - full;
+        var fractionPct = Math.max(0, Math.min(100, Math.round(fraction * 100)));
+        var html = '<div class="stars ' + sizeClass + '" aria-label="' + rating + ' sur 5">';
+        for (var i = 1; i <= 5; i++) {
+          if (i <= full) {
+            html += '<span class="star-filled" aria-hidden="true"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="' + starPath + '"></path></svg></span>';
+          } else if (i === full + 1 && fractionPct > 0) {
+            html += '<span class="star-mixed" aria-hidden="true"><span class="empty"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="' + starPath + '"></path></svg></span><span class="half" style="width:' + fractionPct + '%"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="' + starPath + '"></path></svg></span></span>';
+          } else {
+            html += '<span class="star-empty" aria-hidden="true"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="' + starPath + '"></path></svg></span>';
+          }
+        }
+        html += '</div>';
+        return html;
+      }
+
+      function renderBreakdown(breakdown, total) {
+        var order = [5, 4, 3, 2, 1];
+        return order.map(function(star) {
+          var count = breakdown[star] || 0;
+          var pct = total ? Math.round((count / total) * 100) : 0;
+          return '<div class="breakdown-row" role="group" aria-label="' + star + ' étoiles">' +
+                 '  <div>' + star + '</div>' +
+                 '  <div class="bar" aria-hidden="true"><span style="width:' + pct + '%"></span></div>' +
+                 '  <div style="text-align:right">' + count + '</div>' +
+                 '</div>';
+        }).join('');
+      }
+
+      function renderReviewCard(review, includeInstructor) {
+        var reply = includeInstructor ? review.instructorResponse : null;
+        return '<div class="review-card">' +
+               '  <div>' +
+               '    <div class="review-header">' +
+               '      <div class="review-header-left">' +
+               '        <div class="avatar">' + review.userInitials + '</div>' +
+               '        <div>' +
+               '          <div class="user-name">' + review.userName + '</div>' +
+               '          <div class="user-meta">' + renderStars(review.rating, 'sm') + ' <span class="time-ago">' + review.timeAgo + '</span>' +
+               '          </div>' +
+               '        </div>' +
+               '      </div>' +
+               '    </div>' +
+               '    <div class="review-content">' + review.content + '</div>' +
+               (reply ? ('    <div class="instructor-reply" aria-label="Réponse">' +
+                '      <div class="instructor-meta">' + reply.instructorName + ' • ' + reply.timeAgo + '</div>' +
+                '      <div>' + reply.content + '</div>' +
+                '    </div>') : '') +
+               '  </div>' +
+               '  <div class="review-actions">' +
+               '    <div class="actions-left">' +
+               '      <span class="label">Utile ?</span>' +
+               '      <button class="btn-vote" data-action="helpful" data-id="' + review.id + '" type="button" aria-label="Utile">' + iconThumbUp + '</button>' +
+               '      <button class="btn-vote" data-action="notHelpful" data-id="' + review.id + '" type="button" aria-label="Pas utile">' + iconThumbDown + '</button>' +
+               '    </div>' +
+               '  </div>' +
+               '</div>';
+      }
+
+      var allReviews = initialReviews.concat(additionalReviews);
+
+      var carouselItems = allReviews.filter(function(r){ return r.id !== '3'; }).slice(0, 4);
+      var track = document.getElementById('carousel-track');
+      if (track) { track.innerHTML = carouselItems.map(function(r) { return '<div class="slide">' + renderReviewCard(r, false) + '</div>'; }).join(''); }
+
+      var viewport = document.getElementById('carousel-viewport');
+      var prevBtn = document.querySelector('#reviews-section .nav.prev');
+      var nextBtn = document.querySelector('#reviews-section .nav.next');
+      if (prevBtn && viewport) prevBtn.addEventListener('click', function() { viewport.scrollBy({ left: -viewport.clientWidth, behavior: 'smooth' }); });
+      if (nextBtn && viewport) nextBtn.addEventListener('click', function() { viewport.scrollBy({ left: viewport.clientWidth, behavior: 'smooth' }); });
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('button[data-action]') : null;
+        if (!btn) return;
+        btn.classList.add('bump');
+        setTimeout(function() { btn.classList.remove('bump'); }, 220);
+      });
+
+      var modal = document.getElementById('reviews-modal');
+      var openBtn = document.getElementById('show-all');
+      var closeBtn = document.getElementById('close-modal');
+      if (openBtn && modal) {
+        openBtn.addEventListener('click', function() {
+          var avgScoreEl = document.getElementById('avg-score');
+          var avgStarsEl = document.getElementById('avg-stars');
+          var totalRatingsEl = document.getElementById('total-ratings');
+          var breakdownEl = document.getElementById('breakdown');
+          var reviewsListEl = document.getElementById('reviews-list');
+          if (avgScoreEl) avgScoreEl.textContent = String(reviewStats.averageRating);
+          if (avgStarsEl) avgStarsEl.innerHTML = renderStars(reviewStats.averageRating, 'md');
+          if (totalRatingsEl) totalRatingsEl.textContent = reviewStats.totalRatings + ' avis';
+          if (breakdownEl) breakdownEl.innerHTML = renderBreakdown(reviewStats.breakdown, reviewStats.totalRatings);
+          if (reviewsListEl) reviewsListEl.innerHTML = allReviews.map(function(r) { return renderReviewCard(r, true); }).join('');
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          openBtn.classList.remove('pulse'); void openBtn.offsetWidth; openBtn.classList.add('pulse');
+        });
+      }
+      function closeReviewsModal() { if (!modal) return; modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); }
+      if (closeBtn) closeBtn.addEventListener('click', closeReviewsModal);
+      if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeReviewsModal(); });
+    })();
+  </script>
+
+  <!-- Curriculum data and rendering -->
+  <script>
+  const courseModules = [
+    { moduleNumber: 1, title: "Au Cœur d'une Nouvelle Architecture de la Connaissance", lessons: [
+      { title: "Introduction et Vision du Module", timestamp: "00:00", isPreview: true },
+      { title: "L'Anatomie d'un LLM : Architecture et Paramètres", timestamp: "02:45" },
+      { title: "La Genèse Computationnelle : Pré-entraînement et Échelle", timestamp: "09:10" },
+      { title: "La Tokenisation : Décoder le Langage Interne de l'IA", timestamp: "16:20" },
+      { title: "L'Alignement (SFT) et Synthèse des Concepts Clés", timestamp: "21:50" }
+    ]},
+    { moduleNumber: 2, title: "LLMs en Pratique – Puissance Révélée, Prudence et Rigueur", lessons: [
+      { title: "Potentiel Révélé : Accès, Synthèse & Outils", timestamp: "00:00" },
+      { title: "Le Mirage de la Certitude : Comprendre les Hallucinations", timestamp: "04:30" },
+      { title: "Limites Structurelles : Raisonnement Séquentiel", timestamp: "08:55" },
+      { title: "Principes de Vigilance : Stratégies pour une Utilisation Éclairée", timestamp: "12:15" },
+      { title: "Cas Pratique : Analyse d'une Réponse IA (Puissance vs. Risque)", timestamp: "15:05" }
+    ]},
+    { moduleNumber: 3, title: "LLMs & L'Esprit Clinique – Synergie et Horizons Futurs", lessons: [
+      { title: "Extension via Outils : Web, Code et RAG", timestamp: "00:00" },
+      { title: "Anticiper l'Ère Multimodale", timestamp: "03:50" },
+      { title: "Différencier les Modèles et leurs Capacités", timestamp: "07:25" },
+      { title: "Personnalisation et Gestion du Contexte", timestamp: "11:10" },
+      { title: "Conclusion : Vers une Pratique Clinique Augmentée", timestamp: "14:40" }
+    ]},
+    { moduleNumber: 4, title: "Introduction à l'Iceberg des Prompts – La Science de l'Instruction", lessons: [
+      { title: "La Métaphore de l'Iceberg : Dévoiler la Science Cachée", timestamp: "00:00" },
+      { title: "Composant 1 : Le Pouvoir de la Persona", timestamp: "03:15" },
+      { title: "Composant 2 : L'Importance Cruciale du Contexte", timestamp: "06:40" },
+      { title: "Composants 3 & 4 : Instruction et Contraintes", timestamp: "10:55" },
+      { title: "Composants 5 & 6 : Format de Sortie et Exemples (Few-Shot)", timestamp: "14:25" }
+    ]},
+    { moduleNumber: 5, title: "Les Fondations Cliniques (Basiques)", lessons: [
+      { title: "Technique 1 : La Demande Précise et l'Art de l'Itération", timestamp: "00:00" },
+      { title: "Technique 2 : L'Ancrage Contextuel pour le Diagnostic", timestamp: "04:05" },
+      { title: "Technique 3 : Les Contraintes pour la Sécurité et la Pertinence", timestamp: "08:20" },
+      { title: "Technique 4 : Standardiser avec le Few-Shot Prompting", timestamp: "12:10" },
+      { title: "Synthèse et Cas d'Application Intégrés", timestamp: "15:30" }
+    ]},
+    { moduleNumber: 6, title: "La Maîtrise des Nuances Cliniques (Intermédiaires)", lessons: [
+      { title: "Raisonnement Structuré (Chain-of-Thought)", timestamp: "00:00" },
+      { title: "Filtres de Précision et Exigences de Preuve", timestamp: "03:45" },
+      { title: "Intégration de Données Hétérogènes", timestamp: "07:50" },
+      { title: "Orchestration de Stratégies Thérapeutiques", timestamp: "11:30" },
+      { title: "Application : L'IA comme 'Contre-Expert' pour Déjouer les Biais", timestamp: "14:55" }
+    ]},
+    { moduleNumber: 7, title: "Profondeur de Raisonnement Clinique (Avancées)", lessons: [
+      { title: "Raisonnement Méta-cognitif : Réflexion et Auto-Correction", timestamp: "00:00" },
+      { title: "Confrontation d'Évidences et Résolution de Conflits", timestamp: "04:10" },
+      { title: "Simulation de Scénarios et Analyse Contrefactuelle", timestamp: "08:40" },
+      { title: "Orchestration d'Agents Multi-Outils", timestamp: "12:00" },
+      { title: "Application : Génération de Plans de Recherche", timestamp: "15:20" }
+    ]},
+    { moduleNumber: 8, title: "La Frontière Ultime & Intégration Pratique", lessons: [
+      { title: "Techniques Abyssales : Prompting Zéro-Shot et Auto-Consistance", timestamp: "00:00" },
+      { title: "Cas Pratiques : Du Diagnostic à la Thérapeutique", timestamp: "05:00" },
+      { title: "Intégration au Workflow Clinique Quotidien", timestamp: "09:30" },
+      { title: "L'Avenir de la Collaboration Homme-IA en Médecine", timestamp: "13:10" },
+      { title: "Conclusion : Devenir un Architecte de l'IA en Santé", timestamp: "16:05" }
+    ]}
+  ];
+
+  function renderAccordion(modules) {
+    const list = document.getElementById('mc-accordion-list');
+    if (!list) return;
+    list.innerHTML = '';
+    modules.forEach((mod) => {
+      const details = document.createElement('details');
+      details.className = 'mc-item';
+      const summary = document.createElement('summary');
+      summary.className = 'mc-header';
+      const chev = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      chev.setAttribute('class', 'mc-chevron');
+      const useChev = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      useChev.setAttribute('href', '#icon-chevron');
+      chev.appendChild(useChev);
+      const number = document.createElement('span');
+      number.className = 'mc-number';
+      number.textContent = `Module ${mod.moduleNumber}`;
+      summary.appendChild(chev);
+      summary.appendChild(number);
+      const content = document.createElement('div');
+      content.className = 'mc-content';
+      const ul = document.createElement('ul');
+      ul.className = 'mc-lessons';
+      mod.lessons.forEach((lesson) => {
+        const li = document.createElement('li');
+        li.className = 'mc-lesson';
+        const left = document.createElement('div');
+        left.className = 'mc-lesson-left';
+        const iconWrap = document.createElement('span');
+        iconWrap.className = 'mc-lesson-icon';
+        const videoIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const useVideo = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        useVideo.setAttribute('href', '#icon-video');
+        videoIcon.appendChild(useVideo);
+        iconWrap.appendChild(videoIcon);
+        const title = document.createElement('span');
+        title.className = 'mc-lesson-title';
+        title.textContent = lesson.title;
+        left.appendChild(iconWrap);
+        left.appendChild(title);
+        li.appendChild(left);
+        if (lesson.isPreview) {
+          const right = document.createElement('div');
+          right.className = 'mc-lesson-right';
+          const preview = document.createElement('span');
+          preview.className = 'mc-preview';
+          const pvIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          const pvUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+          pvUse.setAttribute('href', '#icon-play');
+          pvIcon.appendChild(pvUse);
+          const pvText = document.createElement('span');
+          pvText.textContent = 'Preview';
+          preview.appendChild(pvIcon);
+          preview.appendChild(pvText);
+          right.appendChild(preview);
+          li.appendChild(right);
+        }
+        ul.appendChild(li);
+      });
+      content.appendChild(ul);
+      details.appendChild(summary);
+      details.appendChild(content);
+      list.appendChild(details);
+    });
+  }
+
+  function wireToggleAll() {
+    const btn = document.querySelector('#mc-accordion .mc-toggle-all');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const details = Array.from(document.querySelectorAll('#mc-accordion .mc-item'));
+      const anyClosed = details.some(d => !d.open);
+      details.forEach(d => d.open = anyClosed);
+      btn.setAttribute('aria-expanded', String(anyClosed));
+      btn.textContent = anyClosed ? 'Replier toutes les sections' : 'Déplier toutes les sections';
+    });
+  }
+
+  renderAccordion(courseModules);
+  wireToggleAll();
+  </script>
+
+  <!-- Lead magnet JS -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('drFrameworkForm');
+    const contentDiv = document.getElementById('drFrameworkContent');
+    const successDiv = document.getElementById('drFrameworkSuccess');
+    const emailInput = document.getElementById('drFrameworkEmail');
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        if (!email) return;
+        fetch('https://formsubmit.co/ajax/ridamine42@gmail.com', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ _subject: 'New lead', email: email })
+        }).then(function(response) { if (!response.ok) { throw new Error('Request failed'); } return response.json(); })
+        .then(function() { contentDiv.style.display = 'none'; successDiv.style.display = 'block'; })
+        .catch(function() { alert("Une erreur s'est produite. Merci de réessayer."); });
+      });
+    }
+  });
+  </script>
+
+  <!-- Instructor card toggle -->
+  <script>
+  (() => {
+    const root = document.getElementById('instructor-card-2');
+    if (!root) return;
+    const btn = root.querySelector('.toggle-more');
+    const aboutPreview = root.querySelector('#about-preview');
+    const aboutMore = root.querySelector('#about-more');
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.textContent = expanded ? 'Voir plus →' : 'Voir moins ←';
+      if (aboutMore) aboutMore.style.display = expanded ? 'none' : 'block';
+      if (aboutPreview) aboutPreview.style.display = expanded ? 'block' : 'none';
+    });
+  })();
+  </script>
+
+  <!-- FAQ JS -->
+  <script>
+  (function () {
+    var root = document.getElementById('e-faq-1');
+    if (!root) return;
+    var buttons = root.querySelectorAll('.faq-question');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        var controlsId = btn.getAttribute('aria-controls');
+        var panel = controlsId ? document.getElementById(controlsId) : null;
+        if (!panel) return;
+        if (expanded) { panel.setAttribute('hidden', ''); } else { panel.removeAttribute('hidden'); }
+      });
+    });
+    var showAllBtn = root.querySelector('#faq-show-all');
+    if (showAllBtn) { showAllBtn.addEventListener('click', function () { root.classList.add('show-all'); }); }
+  })();
+  </script>
+
+  <!-- MEDU JS -->
+  <script>
+  (function(){
+    var root=document.getElementById('medical-education'); if(!root) return;
+    var accBtn=root.querySelector('#medu-acc-prereq');
+    var accPanel=document.getElementById('medu-prerequis');
+    if(accBtn && accPanel){
+      accBtn.addEventListener('click',function(){
+        var expanded=accBtn.getAttribute('aria-expanded')==='true';
+        accBtn.setAttribute('aria-expanded', String(!expanded));
+        accPanel.hidden=expanded;
+        var ind=accBtn.querySelector('.medu__acc-ind');
+        if(ind) ind.textContent=expanded?'▼':'▲';
+      });
+    }
+    var expandBtn=document.getElementById('medu-toggle');
+    var collapseBtn=document.getElementById('medu-collapse');
+    var after=document.getElementById('medu-after');
+    if(expandBtn && collapseBtn && after){
+      expandBtn.addEventListener('click', function(){ after.hidden=false; expandBtn.hidden=true; collapseBtn.hidden=false; expandBtn.setAttribute('aria-expanded','true'); });
+      collapseBtn.addEventListener('click', function(){ after.hidden=true; expandBtn.hidden=false; collapseBtn.hidden=true; expandBtn.setAttribute('aria-expanded','false'); });
+    }
+  })();
+  </script>
+</body>
+</html>
+
