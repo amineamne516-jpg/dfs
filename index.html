@@ -51,6 +51,11 @@
 .my-custom-hero-widget .badge{font-size:12px;background:#eef2ff;color:#3730a3;border:1px solid rgba(55,48,163,.18);padding:2px 8px;border-radius:999px;font-weight:600}
 .my-custom-hero-widget .badge--success{background:#ecfdf5;color:#065f46;border-color:rgba(6,95,70,.18)}
 
+/* Hero testimonial */
+.my-custom-hero-widget .hero-testimonial{border:1px solid #e5e7eb;border-radius:12px;padding:14px;background:#fff;margin:10px 0 4px}
+.my-custom-hero-widget .hero-testimonial__quote{margin-top:8px;color:#111827;font-size:15px}
+.my-custom-hero-widget .hero-testimonial__author{margin-top:6px;color:#6b7280;font-weight:600;text-align:right}
+
 /* CTA + pricing */
 .my-custom-hero-widget .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 8px}
 .my-custom-hero-widget .btn{padding:14px 22px;border-radius:10px;font-weight:700;transition:transform .15s ease, background .2s ease}
@@ -488,11 +493,25 @@
                 <svg class="is-half" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
               </span>
               <span class="rating"><strong>4.6</strong></span>
-              <a href="#reviews-section" class="reviews-link">(237 avis)</a>
+              <a href="#reviews" class="reviews-link">(237 avis)</a>
               <span class="participants">523 participants</span>
             </div>
             <span class="badge">Recommandé</span>
             <span class="badge badge--success">Best Seller</span>
+          </div>
+
+          <!-- Hero Testimonial (standalone) -->
+          <div class="hero-testimonial" aria-label="Témoignage">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
+            </div>
+            <div class="hero-testimonial__quote">« Ce qui m’a surpris, ce n’est pas la vitesse, mais la rigueur médicale que les prompts apportent. Je pensais que ça allait simplifier ; ça améliore carrément le raisonnement clinique. »</div>
+            <div class="hero-testimonial__author">Dr. Emma L.</div>
+            <p style="text-align:center; margin-top:10px;"><a href="#reviews" style="text-decoration:underline; color:#0056b3; font-size:0.9em;">Voir les 236 autres avis de confrères →</a></p>
           </div>
 
           <div class="cta-row">
@@ -544,65 +563,7 @@
     </div>
   </div>
 
-  <!-- PROOF: Testimonials -->
-  <div id="reviews-section">
-    <div class="reviews-container" aria-live="polite">
-      <div class="title">Une Approche Validée par Vos Confrères</div>
-
-      <!-- Lead testimonial (prominent) -->
-      <div class="lead" aria-label="Témoignage principal">
-        <div class="stars stars-md" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.87 1.401-8.168L.132 9.211l8.2-1.193z"/></svg>
-        </div>
-        <div class="review-content" style="margin-top:8px; font-size:16px; color:#111827;">
-          « Ce qui m’a surpris, ce n’est pas la vitesse, mais la rigueur médicale que les prompts apportent. Je pensais que ça allait simplifier ; ça améliore carrément le raisonnement clinique. »
-        </div>
-        <div class="who">Dr. Emma L.</div>
-      </div>
-
-      <!-- Carousel (first 4 cards, excluding Emma shown above) -->
-      <div class="carousel" id="carousel-view">
-        <button class="nav prev" aria-label="Précédent" type="button">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="carousel-viewport" id="carousel-viewport"><div class="track" id="carousel-track"></div></div>
-        <button class="nav next" aria-label="Suivant" type="button">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-
-      <div class="cta-wrap">
-        <button id="show-all" class="btn-primary" type="button">Voir tous les commentaires</button>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-backdrop" id="reviews-modal" aria-hidden="true" role="dialog" aria-modal="true">
-      <div class="modal-panel" role="document">
-        <div class="modal-header">
-          <div class="modal-title">Avis</div>
-          <button class="close-btn" id="close-modal" aria-label="Fermer" type="button">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="reviews-header">
-            <div class="avg-box">
-              <div class="avg-score" id="avg-score">4.5</div>
-              <div class="star-row stars-md" id="avg-stars"></div>
-              <div class="total-ratings" id="total-ratings"></div>
-            </div>
-            <div class="breakdown" id="breakdown"></div>
-          </div>
-          <div class="reviews-list" id="reviews-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- WHAT YOU WILL MASTER -->
   <section id="objectifs-pedagogiques" class="bg-white py-12 sm:py-16 lg:py-20">
@@ -696,6 +657,39 @@
       </div>
     </div>
   </section>
+
+  <!-- REVIEW LIBRARY (moved below Methodology) -->
+  <div id="reviews" aria-hidden="true" style="position:relative;top:-1px"></div>
+  <div id="reviews-section" aria-label="Preuves sociales">
+    <div class="reviews-container" aria-live="polite">
+      <div class="title">Une Approche Validée par Vos Confrères</div>
+      <div class="carousel" id="carousel-view">
+        <button class="nav prev" aria-label="Précédent" type="button">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-viewport"><div class="track" id="carousel-track"></div></div>
+        <button class="nav next" aria-label="Suivant" type="button">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="cta-wrap"><button id="show-all" class="btn-primary" type="button">Voir tous les commentaires</button></div>
+    </div>
+    <div class="modal-backdrop" id="reviews-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal-panel" role="document">
+        <div class="modal-header">
+          <div class="modal-title">Avis</div>
+          <button class="close-btn" id="close-modal" aria-label="Fermer" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="modal-body">
+          <div class="reviews-header">
+            <div class="avg-box"><div class="avg-score" id="avg-score">4.5</div><div class="star-row stars-md" id="avg-stars"></div><div class="total-ratings" id="total-ratings"></div></div>
+            <div class="breakdown" id="breakdown"></div>
+          </div>
+          <div class="reviews-list" id="reviews-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- CURRICULUM -->
   <!-- Inline icon sprite for curriculum -->
